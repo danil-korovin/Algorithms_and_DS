@@ -1,5 +1,13 @@
 #!/bin/bash
-
 set -e
 
-g++ -std=c++17 -o ascii85 ascii85.cpp
+CXXFLAGS="-std=c++11 -Wall -Wextra -pedantic"
+LDFLAGS="-lgtest -lgtest_main -pthread"
+MAIN_EXE="ascii85"
+TEST_EXE="ascii85_tests"
+SOURCE="ascii85.cpp main.cpp"
+TEST_SOURCE="ascii85.cpp test.cpp"
+
+g++ $CXXFLAGS -o $MAIN_EXE $SOURCE
+g++ $CXXFLAGS -o $TEST_EXE $TEST_SOURCE $LDFLAGS
+
