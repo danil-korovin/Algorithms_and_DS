@@ -4,6 +4,7 @@ import os
 import string
 import subprocess
 
+
 #Генерируем случайную строку.
 def generate_random_string(length):
     characters = string.printable.replace('\n', '') # Убираем лишнее

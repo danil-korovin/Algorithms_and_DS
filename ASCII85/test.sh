@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 # Encoding 
 echo "Default encoding"
 echo "Hello, World!" | ./ascii85

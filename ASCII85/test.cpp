@@ -3,6 +3,7 @@
 #include <sstream>
 #include <iostream>
 
+
 // Передаём ссылку на строку для кодировки
 std::string encodeString(const std::string& input) {
     std::vector<std::uint8_t> data(input.begin(), input.end());
