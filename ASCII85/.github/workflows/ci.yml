@@ -1,23 +1,42 @@
-name: ASCII85 CI
+name: CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main, ascii85 ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ main ]
 
 jobs:
-  build:
+  build_and_test:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install g++
-        run: sudo apt-get update && sudo apt-get install -y g++
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
 
       - name: Build
-        run: chmod +x build.sh && ./build.sh
+        run: |
+          chmod +x build.sh test.sh
+          ./build.sh
 
-      - name: Run tests
-        run: chmod +x test.sh && ./test.sh
+      - name: Run
+        run: |
+          ./test.sh
+          ./ascii85 <test_encode.txt> output.txt
+          ./ascii85 -e <test_encode.txt> output.txt
+          ./ascii85 -s <test_encode.txt> output.txt
+
+      - name: Google Test
+        run: ./ascii85_tests
+
+      - name: Python Test
+        run: python3 test.py
+
