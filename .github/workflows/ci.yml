@@ -28,10 +28,10 @@ jobs:
         run: |
           sudo apt update && sudo apt install -y g++ make cmake python3
           sudo apt-get install -y build-essential libgtest-dev googletest
+      - name: Makescripts esecutable
+        run: chmod +x build.sh test.sh
       - name: Build
-        run: |
-          chmod +x build.sh test.sh
-          ./build.sh
+        run: ./build.sh
 
       - name: Run
         run: |
