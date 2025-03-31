@@ -12,7 +12,9 @@ on:
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: ./ascii85
     steps:
       - uses: actions/checkout@v3
 
