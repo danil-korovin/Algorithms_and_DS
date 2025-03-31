@@ -2,7 +2,7 @@
 set -e
 
 
-CXXFLAGS="-std=c++11 -Wall -Wextra -pedantic"
+CXXFLAGS="-std=c++14 -Wall -Wextra -pedantic"
 LDFLAGS="-lgtest -lgtest_main -pthread"
 MAIN_EXE="ascii85"
 TEST_EXE="ascii85_tests"
