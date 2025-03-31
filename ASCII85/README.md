@@ -28,3 +28,7 @@ chmod +x build.sh test.sh
 ```
 ./ascii85_tests
 ```
+## Python Test
+```
+python3 test.py
+```

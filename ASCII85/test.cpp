@@ -23,13 +23,16 @@ TEST(Test2, DecodeEmptyString) {
     ASSERT_EQ(decodeString(""), "");
 }
 
-
 TEST(Test3, EncodeString) {
-    ASSERT_EQ(encodeString("Hello, World!"), "87cURD_*#4DfTZ)+TMKB");
+    ASSERT_EQ(encodeString("6$dBaCcEtM"), "2C)g\"@7+NnFA2");
+}
+
+TEST(Test4, EncodeString) {
+    ASSERT_EQ(encodeString("Hello, World!"), "87cURD_*#4DfTZ)+T");
 }
 
 
-TEST(Test4, Decode_zeros) {
+TEST(Test5, Decode_zeros) {
     ASSERT_EQ(decodeString("z"), "\0\0\0\0");
 }
 

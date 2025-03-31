@@ -1,12 +1,12 @@
 #include "ascii85.h"
 
-// Кодирования 4 байт ASCII85
+// Кодирование 4 байт ASCII85
 std::string encode_bytes(const std::vector<std::uint8_t>& bytes) {
     std::uint32_t val = 0;
     for (std::size_t i = 0; i < bytes.size(); ++i) {
         val = (val << 8) | bytes[i]; // Сдвигаем значение на 8 бит влево и добавляем текущий байт
     }
-    if (val == 0) {
+    if (val == 0 && bytes.size() == 4) {
         return "z";
     }
     std::string res;
@@ -17,24 +17,31 @@ std::string encode_bytes(const std::vector<std::uint8_t>& bytes) {
     return res;
 }
 
-// Кодирования ASCII85
+// Кодирование ASCII85
 std::string ascii85_encode(const std::vector<std::uint8_t>& data) {
     std::string res = "";
     for (std::size_t i = 0; i < data.size(); i += 4) {
         std::vector<std::uint8_t> bytes; // Храним 4 байта
+        int num_bytes = 0;
         for (std::size_t j = 0; j < 4; ++j) {
             if (i + j < data.size()) { // Проверка на выход за пределы
                 bytes.push_back(data[i + j]); // Заполняем байтами
+                num_bytes++;
             } else {
                 bytes.push_back(0); // Заполняем нулями
             }
         }
-        res += encode_bytes(bytes);
+        std::string encoded_str = encode_bytes(bytes);
+        if (num_bytes < 4) { // Удаляем лишние символы в конце строки
+            num_bytes++;
+            encoded_str = encoded_str.substr(0, num_bytes);
+        }
+        res += encoded_str;
     }
     return res;
 }
 
-// Декодирования 4 байт ASCII85 
+// Декодирование 4 байт ASCII85 
 std::vector<std::uint8_t> decode_bytes(const std::string& bytes) {
     if (bytes == "z") {
         return {0, 0, 0, 0};
@@ -51,7 +58,7 @@ std::vector<std::uint8_t> decode_bytes(const std::string& bytes) {
     return res;
 }
 
-// Декодирования ASCII85
+// Декодирование ASCII85
 std::vector<std::uint8_t> ascii85_decode(const std::string& encoded) {
     std::string data = encoded;
     std::vector<std::uint8_t> res;
