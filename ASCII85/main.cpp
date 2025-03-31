@@ -1,5 +1,6 @@
 #include "ascii85.h"
 
+
 int main(int argc, char* argv[]) {
     int encode = 1;
     int stream = 0;

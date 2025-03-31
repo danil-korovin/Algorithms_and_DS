@@ -15,6 +15,7 @@ jobs:
     defaults:
       run:
         working-directory: ./ASCII85
+
     steps:
       - uses: actions/checkout@v3
 
@@ -25,13 +26,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          sudo apt-get update
+          sudo apt update && sudo apt install -y g++ make cmake python3
           sudo apt-get install -y build-essential libgtest-dev googletest
+      - name: Makescripts esecutable
+        run: chmod +x build.sh test.sh
       - name: Build
-        run: |
-          chmod +x build.sh test.sh
-          ./build.sh
+        run: ./build.sh
 
       - name: Run
         run: |
@@ -45,4 +45,3 @@ jobs:
 
       - name: Python Test
         run: python3 test.py
-

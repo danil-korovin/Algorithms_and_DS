@@ -1,5 +1,6 @@
 #include "ascii85.h"
 
+
 // Кодирование 4 байт ASCII85
 std::string encode_bytes(const std::vector<std::uint8_t>& bytes) {
     std::uint32_t val = 0;
